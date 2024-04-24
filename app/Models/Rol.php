@@ -32,6 +32,6 @@ class Rol extends Model
 
     // public function permisos(): BelongsTo
     // {
-    //     // return $this->belongsTo(Permisos::class);
+    //     return $this->belongsTo(Permisos::class);
     // }
 }

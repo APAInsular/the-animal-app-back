@@ -11,18 +11,18 @@ created:
     - database/factories/TareasFactory.php
     - database/factories/VoluntarioFactory.php
     - database/factories/FormacionFactory.php
-    - database/migrations/2024_04_24_080901_create_rols_table.php
-    - database/migrations/2024_04_24_080902_create_permisos_table.php
-    - database/migrations/2024_04_24_080903_create_direccion_usuarios_table.php
-    - database/migrations/2024_04_24_080904_create_padrinos_table.php
-    - database/migrations/2024_04_24_080905_create_animals_table.php
-    - database/migrations/2024_04_24_080906_create_especies_table.php
-    - database/migrations/2024_04_24_080907_create_necesidades_table.php
-    - database/migrations/2024_04_24_080908_create_alimentacions_table.php
-    - database/migrations/2024_04_24_080909_create_cuidados_table.php
-    - database/migrations/2024_04_24_080910_create_tareas_table.php
-    - database/migrations/2024_04_24_080911_create_voluntarios_table.php
-    - database/migrations/2024_04_24_080912_create_formacions_table.php
+    - database/migrations/2024_04_24_083056_create_rols_table.php
+    - database/migrations/2024_04_24_083057_create_permisos_table.php
+    - database/migrations/2024_04_24_083058_create_direccion_usuarios_table.php
+    - database/migrations/2024_04_24_083059_create_padrinos_table.php
+    - database/migrations/2024_04_24_083100_create_animals_table.php
+    - database/migrations/2024_04_24_083101_create_especies_table.php
+    - database/migrations/2024_04_24_083102_create_necesidades_table.php
+    - database/migrations/2024_04_24_083103_create_alimentacions_table.php
+    - database/migrations/2024_04_24_083104_create_cuidados_table.php
+    - database/migrations/2024_04_24_083105_create_tareas_table.php
+    - database/migrations/2024_04_24_083106_create_voluntarios_table.php
+    - database/migrations/2024_04_24_083107_create_formacions_table.php
     - app/Models/Rol.php
     - app/Models/Permiso.php
     - app/Models/DireccionUsuario.php
@@ -36,7 +36,8 @@ created:
     - app/Models/Voluntario.php
     - app/Models/Formacion.php
 models:
-    Rol: { nombre: enum, permisos_id: id }
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Rol: { nombre: 'string:45', permisos_id: id }
     Permiso: { descripcion: text }
     DireccionUsuario: { calle: 'string:100', numero: integer, ciudad: 'string:45', localidad: 'string:45', codigo_postal: 'string:10', usuario_id: id }
     Padrino: { nombre: 'string:45', apellido: 'string:45', email: 'string:100', telefono: 'string:45', direccion_id: id }

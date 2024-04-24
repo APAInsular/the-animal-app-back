@@ -35,6 +35,6 @@ class Padrino extends Model
 
     // public function direccion(): BelongsTo
     // {
-    //     // return $this->belongsTo(Direccion::class);
+    //     return $this->belongsTo(Direccion::class);
     // }
 }

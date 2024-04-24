@@ -22,7 +22,7 @@ class RolFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->randomElement(/** enum_attributes **/),
+            'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'permisos_id' => Permisos::factory(),
         ];
     }
