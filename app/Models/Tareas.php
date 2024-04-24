@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tareas extends Model
 {
@@ -17,7 +19,11 @@ class Tareas extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'se_repite',
+        'SeRepite',
+        'fecha',
+        'comentario',
+        'animal_id',
+        'voluntario_id',
     ];
 
     /**
@@ -27,5 +33,23 @@ class Tareas extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'fecha' => 'date',
+        'animal_id' => 'integer',
+        'voluntario_id' => 'integer',
     ];
+
+    public function animal(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class);
+    }
+
+    public function voluntario(): BelongsTo
+    {
+        return $this->belongsTo(Voluntario::class);
+    }
+
+    public function voluntarios(): HasMany
+    {
+        return $this->hasMany(Voluntario::class);
+    }
 }

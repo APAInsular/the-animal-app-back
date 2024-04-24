@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Animal;
 use App\Models\Cuidados;
 
 class CuidadosFactory extends Factory
@@ -23,6 +24,7 @@ class CuidadosFactory extends Factory
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'descripcion' => $this->faker->text(),
+            'animal_id' => Animal::factory(),
         ];
     }
 }

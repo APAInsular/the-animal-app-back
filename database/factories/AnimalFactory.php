@@ -9,6 +9,7 @@ use App\Models\Animal;
 use App\Models\Cuidados;
 use App\Models\Especie;
 use App\Models\Necesidades;
+use App\Models\Tarea;
 
 class AnimalFactory extends Factory
 {
@@ -32,6 +33,7 @@ class AnimalFactory extends Factory
             'alimentacion_id' => Alimentacion::factory(),
             'cuidados_id' => Cuidados::factory(),
             'necesidades_id' => Necesidades::factory(),
+            'tarea_id' => Tarea::factory(),
         ];
     }
 }

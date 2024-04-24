@@ -20,7 +20,7 @@ class Padrino extends Model
         'apellido',
         'email',
         'telefono',
-        'direccion_id',
+        'user_id',
     ];
 
     /**
@@ -30,11 +30,11 @@ class Padrino extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'direccion_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
-    // public function direccion(): BelongsTo
-    // {
-    //     return $this->belongsTo(Direccion::class);
-    // }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

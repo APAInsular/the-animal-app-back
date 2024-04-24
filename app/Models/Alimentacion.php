@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Alimentacion extends Model
 {
@@ -17,6 +18,7 @@ class Alimentacion extends Model
     protected $fillable = [
         'tipo',
         'cantidad',
+        'animal_id',
     ];
 
     /**
@@ -26,5 +28,11 @@ class Alimentacion extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'animal_id' => 'integer',
     ];
+
+    public function animal(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class);
+    }
 }

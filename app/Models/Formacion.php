@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Formacion extends Model
 {
@@ -30,4 +31,9 @@ class Formacion extends Model
         'fecha_inicio' => 'datetime',
         'fecha_fin' => 'datetime',
     ];
+
+    public function voluntarios(): HasMany
+    {
+        return $this->hasMany(Voluntario::class);
+    }
 }

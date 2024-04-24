@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Animal extends Model
 {
@@ -23,6 +25,7 @@ class Animal extends Model
         'alimentacion_id',
         'cuidados_id',
         'necesidades_id',
+        'tarea_id',
     ];
 
     /**
@@ -36,7 +39,13 @@ class Animal extends Model
         'alimentacion_id' => 'integer',
         'cuidados_id' => 'integer',
         'necesidades_id' => 'integer',
+        'tarea_id' => 'integer',
     ];
+
+    public function necesidadesCuidadosTareas(): HasMany
+    {
+        return $this->hasMany(NecesidadesCuidadosTareas::class);
+    }
 
     public function especie(): BelongsTo
     {
@@ -56,5 +65,15 @@ class Animal extends Model
     public function necesidades(): BelongsTo
     {
         return $this->belongsTo(Necesidades::class);
+    }
+
+    public function tarea(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Tareas::class);
+    }
+
+    public function alimentacion(): HasOne
+    {
+        return $this->hasOne(Alimentacion::class);
     }
 }

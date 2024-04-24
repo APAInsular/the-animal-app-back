@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Alimentacion;
+use App\Models\Animal;
 
 class AlimentacionFactory extends Factory
 {
@@ -23,6 +24,7 @@ class AlimentacionFactory extends Factory
         return [
             'tipo' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'cantidad' => $this->faker->regexify('[A-Za-z0-9]{45}'),
+            'animal_id' => Animal::factory(),
         ];
     }
 }

@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Animal;
 use App\Models\Tareas;
+use App\Models\Voluntario;
 
 class TareasFactory extends Factory
 {
@@ -23,7 +25,11 @@ class TareasFactory extends Factory
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'descripcion' => $this->faker->text(),
-            'se_repite' => $this->faker->randomElement(["['S\u00ed'",""]),
+            'SeRepite' => $this->faker->randomElement(["['S\u00ed'","'No']"]),
+            'fecha' => $this->faker->date(),
+            'comentario' => $this->faker->regexify('[A-Za-z0-9]{100}'),
+            'animal_id' => Animal::factory(),
+            'voluntario_id' => Voluntario::factory(),
         ];
     }
 }

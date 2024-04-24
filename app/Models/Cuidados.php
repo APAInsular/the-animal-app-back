@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cuidados extends Model
 {
@@ -17,6 +18,7 @@ class Cuidados extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
+        'animal_id',
     ];
 
     /**
@@ -26,5 +28,11 @@ class Cuidados extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'animal_id' => 'integer',
     ];
+
+    public function animal(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class);
+    }
 }

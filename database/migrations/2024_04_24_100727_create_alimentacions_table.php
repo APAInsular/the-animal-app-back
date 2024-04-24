@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('voluntarios', function (Blueprint $table) {
+        Schema::create('alimentacions', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 45);
-            $table->string('apellido', 45);
-            $table->string('email', 100);
-            $table->string('contraseña', 45);
-            $table->date('disponibilidad');
-            $table->text('idioma');
-            $table->time('horario');
+            $table->string('tipo', 45);
+            $table->string('cantidad', 45);
+            $table->foreignId('animal_id');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('voluntarios');
+        Schema::dropIfExists('alimentacions');
     }
 };

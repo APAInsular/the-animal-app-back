@@ -4,8 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Direccion;
 use App\Models\Padrino;
+use App\Models\User;
 
 class PadrinoFactory extends Factory
 {
@@ -26,7 +26,7 @@ class PadrinoFactory extends Factory
             'apellido' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'email' => $this->faker->safeEmail(),
             'telefono' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'direccion_id' => Direccion::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

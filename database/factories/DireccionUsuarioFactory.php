@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\DireccionUsuario;
-use App\Models\Usuario;
+use App\Models\User;
 
 class DireccionUsuarioFactory extends Factory
 {
@@ -27,7 +27,7 @@ class DireccionUsuarioFactory extends Factory
             'ciudad' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'localidad' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'codigo_postal' => $this->faker->regexify('[A-Za-z0-9]{10}'),
-            'usuario_id' => Usuario::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Rol extends Model
 {
@@ -18,6 +19,7 @@ class Rol extends Model
     protected $fillable = [
         'nombre',
         'permisos_id',
+        'permiso_id',
     ];
 
     /**
@@ -28,10 +30,21 @@ class Rol extends Model
     protected $casts = [
         'id' => 'integer',
         'permisos_id' => 'integer',
+        'permiso_id' => 'integer',
     ];
 
-    // public function permisos(): BelongsTo
-    // {
-    //     return $this->belongsTo(Permisos::class);
-    // }
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function permiso(): BelongsTo
+    {
+        return $this->belongsTo(Permiso::class);
+    }
+
+    public function permisos(): BelongsTo
+    {
+        return $this->belongsTo(Permiso::class);
+    }
 }

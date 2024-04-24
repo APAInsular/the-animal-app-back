@@ -21,7 +21,7 @@ class DireccionUsuario extends Model
         'ciudad',
         'localidad',
         'codigo_postal',
-        'usuario_id',
+        'user_id',
     ];
 
     /**
@@ -31,11 +31,11 @@ class DireccionUsuario extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'usuario_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
-    public function usuario(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\DireccionUsuario::class);
+        return $this->belongsTo(User::class);
     }
 }

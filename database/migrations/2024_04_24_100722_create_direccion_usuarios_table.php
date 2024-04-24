@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ciudad', 45);
             $table->string('localidad', 45);
             $table->string('codigo_postal', 10);
-            $table->foreignId('usuario_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
