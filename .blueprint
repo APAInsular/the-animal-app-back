@@ -1,0 +1,50 @@
+created:
+    - database/factories/RolFactory.php
+    - database/factories/PermisoFactory.php
+    - database/factories/DireccionUsuarioFactory.php
+    - database/factories/PadrinoFactory.php
+    - database/factories/AnimalFactory.php
+    - database/factories/EspecieFactory.php
+    - database/factories/NecesidadesFactory.php
+    - database/factories/AlimentacionFactory.php
+    - database/factories/CuidadosFactory.php
+    - database/factories/TareasFactory.php
+    - database/factories/VoluntarioFactory.php
+    - database/factories/FormacionFactory.php
+    - database/migrations/2024_04_24_080901_create_rols_table.php
+    - database/migrations/2024_04_24_080902_create_permisos_table.php
+    - database/migrations/2024_04_24_080903_create_direccion_usuarios_table.php
+    - database/migrations/2024_04_24_080904_create_padrinos_table.php
+    - database/migrations/2024_04_24_080905_create_animals_table.php
+    - database/migrations/2024_04_24_080906_create_especies_table.php
+    - database/migrations/2024_04_24_080907_create_necesidades_table.php
+    - database/migrations/2024_04_24_080908_create_alimentacions_table.php
+    - database/migrations/2024_04_24_080909_create_cuidados_table.php
+    - database/migrations/2024_04_24_080910_create_tareas_table.php
+    - database/migrations/2024_04_24_080911_create_voluntarios_table.php
+    - database/migrations/2024_04_24_080912_create_formacions_table.php
+    - app/Models/Rol.php
+    - app/Models/Permiso.php
+    - app/Models/DireccionUsuario.php
+    - app/Models/Padrino.php
+    - app/Models/Animal.php
+    - app/Models/Especie.php
+    - app/Models/Necesidades.php
+    - app/Models/Alimentacion.php
+    - app/Models/Cuidados.php
+    - app/Models/Tareas.php
+    - app/Models/Voluntario.php
+    - app/Models/Formacion.php
+models:
+    Rol: { nombre: enum, permisos_id: id }
+    Permiso: { descripcion: text }
+    DireccionUsuario: { calle: 'string:100', numero: integer, ciudad: 'string:45', localidad: 'string:45', codigo_postal: 'string:10', usuario_id: id }
+    Padrino: { nombre: 'string:45', apellido: 'string:45', email: 'string:100', telefono: 'string:45', direccion_id: id }
+    Animal: { nombre: 'string:45', edad: 'string:45', historia: text, especie_id: id, alimentacion_id: id, cuidados_id: id, necesidades_id: id }
+    Especie: { nombre: 'string:45' }
+    Necesidades: { nombre: 'string:45', descripcion: text }
+    Alimentacion: { tipo: 'string:45', cantidad: 'string:45' }
+    Cuidados: { nombre: 'string:45', descripcion: text }
+    Tareas: { nombre: 'string:45', descripcion: text, se_repite: "enum:['Sí', 'No']" }
+    Voluntario: { nombre: 'string:45', apellido: 'string:45', email: 'string:100', contraseña: 'string:45', disponibilidad: date, idioma: text, horario: time }
+    Formacion: { nombre: 'string:45', fecha_inicio: datetime, fecha_fin: datetime }

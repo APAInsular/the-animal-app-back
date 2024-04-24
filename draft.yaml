@@ -1,0 +1,66 @@
+models:
+  Rol:
+    nombre: enum
+    permisos_id: id
+
+  Permiso: 
+    descripcion: text
+
+  DireccionUsuario:
+    calle: string:100
+    numero: integer
+    ciudad: string:45
+    localidad: string:45
+    codigo_postal: string:10
+    usuario_id: id
+
+  Padrino:
+    nombre: string:45
+    apellido: string:45
+    email: string:100
+    telefono: string:45
+    direccion_id: id
+
+  Animal:
+    nombre: string:45
+    edad: string:45
+    historia: text
+    especie_id: id
+    alimentacion_id: id
+    cuidados_id: id
+    necesidades_id: id
+
+  Especie:
+    nombre: string:45
+
+  Necesidades:
+    nombre: string:45
+    descripcion: text
+
+  Alimentacion:
+    tipo: string:45
+    cantidad: string:45
+
+  Cuidados:
+    nombre: string:45
+    descripcion: text
+
+  Tareas:
+    nombre: string:45
+    descripcion: text
+    se_repite: enum:['Sí', 'No']
+
+  Voluntario:
+    nombre: string:45
+    apellido: string:45
+    email: string:100
+    contraseña: string:45
+    disponibilidad: date
+    idioma: text
+    horario: time
+
+  Formacion:
+    nombre: string:45
+    fecha_inicio: datetime
+    fecha_fin: datetime
+
