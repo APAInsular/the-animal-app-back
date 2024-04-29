@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('disponibilidad');
             $table->text('idioma');
             $table->time('horario');
-            $table->foreignId('usuario_id');
-            $table->foreignId('formacion_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('formacion_id')->constrained();
             $table->timestamps();
         });
     }

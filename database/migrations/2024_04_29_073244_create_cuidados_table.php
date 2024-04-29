@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 45);
             $table->text('descripcion');
-            $table->foreignId('animal_id');
             $table->timestamps();
         });
     }
