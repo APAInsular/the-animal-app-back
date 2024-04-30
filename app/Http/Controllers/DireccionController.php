@@ -6,7 +6,7 @@ use App\Models\DireccionUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class DireccionUsuarioController extends Controller
+class DireccionController extends Controller
 {
     /**
      * Display a listing of the direcciones.

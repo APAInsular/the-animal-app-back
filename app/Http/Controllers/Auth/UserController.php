@@ -9,7 +9,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class LoginRegisterController extends Controller
+class UserController extends Controller
 {
     // Método para registrar un nuevo usuario
     public function register(Request $request)

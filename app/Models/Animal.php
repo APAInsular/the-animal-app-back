@@ -42,10 +42,7 @@ class Animal extends Model
         'tarea_id' => 'integer',
     ];
 
-    public function necesidadesCuidadosTareas(): HasMany
-    {
-        return $this->hasMany(NecesidadesCuidadosTareas::class);
-    }
+    
 
     public function especie(): BelongsTo
     {
@@ -72,8 +69,5 @@ class Animal extends Model
         return $this->belongsTo(\App\Models\Tareas::class);
     }
 
-    public function alimentacion(): HasOne
-    {
-        return $this->hasOne(Alimentacion::class);
-    }
+   
 }

@@ -6,7 +6,7 @@ use App\Models\Animal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class AnimalController extends Controller
+class AlimentacionController extends Controller
 {
     /**
      * Display a listing of the animals.
