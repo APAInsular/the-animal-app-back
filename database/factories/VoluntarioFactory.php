@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Formacion;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\Voluntario;
 
 class VoluntarioFactory extends Factory
@@ -30,7 +30,7 @@ class VoluntarioFactory extends Factory
             'disponibilidad' => $this->faker->date(),
             'idioma' => $this->faker->text(),
             'horario' => $this->faker->time(),
-            'usuario_id' => Usuario::factory(),
+            'user_id' => User::factory(),
             'formacion_id' => Formacion::factory(),
         ];
     }

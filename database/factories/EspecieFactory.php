@@ -21,7 +21,7 @@ class EspecieFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
+            'nombre' => $this->faker->unique()->word,  // Generates a unique word for the name
         ];
     }
 }

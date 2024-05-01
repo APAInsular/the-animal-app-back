@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Permiso;
-use App\Models\Permisos;
+// use App\Models\Permisos;
 use App\Models\Rol;
 
 class RolFactory extends Factory
@@ -24,7 +24,7 @@ class RolFactory extends Factory
     {
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'permisos_id' => Permisos::factory(),
+            // 'permisos_id' => Permisos::factory(),
             'permiso_id' => Permiso::factory(),
         ];
     }

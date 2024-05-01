@@ -22,9 +22,9 @@ class AlimentacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'tipo' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'cantidad' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'animal_id' => Animal::factory(),
+            'tipo' => $this->faker->word(),
+            'cantidad' => $this->faker->numberBetween(1, 100),
+            // 'animal_id' => Animal::factory(), // Ensure that this is uncommented only if the Animal table is seeded first
         ];
     }
 }

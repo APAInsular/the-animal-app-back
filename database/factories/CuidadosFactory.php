@@ -22,9 +22,9 @@ class CuidadosFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'descripcion' => $this->faker->text(),
-            'animal_id' => Animal::factory(),
+            'nombre' => $this->faker->word(),
+            'descripcion' => $this->faker->sentence(),
+            // 'animal_id' => \App\Models\Animal::factory(), // This will automatically create an Animal as needed
         ];
     }
 }

@@ -24,7 +24,7 @@ class NecesidadesFactory extends Factory
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'descripcion' => $this->faker->text(),
-            'animal_id' => Animal::factory(),
+            // 'animal_id' => Animal::factory(),
         ];
     }
 }

@@ -9,7 +9,7 @@ use App\Models\Animal;
 use App\Models\Cuidados;
 use App\Models\Especie;
 use App\Models\Necesidades;
-use App\Models\Tarea;
+use App\Models\Tareas;
 
 class AnimalFactory extends Factory
 {
@@ -26,14 +26,14 @@ class AnimalFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'edad' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'historia' => $this->faker->text(),
-            'especie_id' => Especie::factory(),
-            'alimentacion_id' => Alimentacion::factory(),
-            'cuidados_id' => Cuidados::factory(),
-            'necesidades_id' => Necesidades::factory(),
-            'tarea_id' => Tarea::factory(),
+            'nombre' => $this->faker->name(),
+            'edad' => $this->faker->numberBetween(1, 20),
+            'historia' => $this->faker->paragraph(),
+            'especie_id' => \App\Models\Especie::factory(),
+            'alimentacion_id' => \App\Models\Alimentacion::factory(),
+            'cuidados_id' => \App\Models\Cuidados::factory(),
+            'necesidades_id' => \App\Models\Necesidades::factory(),
+            'tarea_id' => \App\Models\Tareas::factory(),
         ];
     }
 }
