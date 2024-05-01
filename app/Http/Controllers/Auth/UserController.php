@@ -30,7 +30,7 @@ class UserController extends Controller
 
         // Crear el nuevo usuario
         $user = User::create([
-            'nombre' => $request->nombre,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);

@@ -80,7 +80,7 @@ models:
   Tareas:
     nombre: string:45
     descripcion: text
-    SeRepite: enum:['Sí','No']
+    SeRepite: enum:[ Sí, No]
     fecha: date
     comentario: string:100
     animal_id: id
