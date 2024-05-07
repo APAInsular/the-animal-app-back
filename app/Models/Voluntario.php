@@ -21,7 +21,6 @@ class Voluntario extends Model
         'nombre',
         'apellido',
         'email',
-        'contraseña',
         'disponibilidad',
         'idioma',
         'horario',

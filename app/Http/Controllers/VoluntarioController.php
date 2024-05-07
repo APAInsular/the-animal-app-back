@@ -73,7 +73,6 @@ class VoluntarioController extends Controller
             'nombre' => 'sometimes|string|max:255',
             'apellido' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:voluntarios,email,' . $id,
-            'contraseña' => 'sometimes|string|min:6',
             'disponibilidad' => 'sometimes|date',
             'idioma' => 'sometimes|string|max:255',
             'horario' => 'sometimes|string|max:255',
