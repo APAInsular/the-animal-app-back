@@ -2,113 +2,103 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;
+use App\Models\Alimentacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class AlimentacionController extends Controller
 {
     /**
-     * Display a listing of the animals.
+     * Display a listing of the alimentacion.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $animals = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'necesidadesCuidadosTareas'])->get();
-        return response()->json($animals);
+        $alimentaciones = Alimentacion::with('animal')->get();
+        return response()->json($alimentaciones);
     }
 
     /**
-     * Store a newly created animal in storage.
+     * Store a newly created alimentacion in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
-            'edad' => 'required|integer',
-            'historia' => 'required|string',
-            'especie_id' => 'required|exists:especies,id',
-            'alimentacion_id' => 'required|exists:alimentacions,id',
-            'cuidados_id' => 'required|exists:cuidados,id',
-            'necesidades_id' => 'required|exists:necesidades,id',
-            'tarea_id' => 'required|exists:tareas,id',
+            'tipo' => 'required|string|max:255',
+            'cantidad' => 'required|numeric',
+            'animal_id' => 'required|exists:animals,id'
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors(), 422);
         }
 
-        $animal = Animal::create($request->all());
-        return response()->json($animal, 201);
+        $alimentacion = Alimentacion::create($request->all());
+        return response()->json($alimentacion, 201);
     }
 
     /**
-     * Display the specified animal.
+     * Display the specified alimentacion.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'necesidadesCuidadosTareas'])->find($id);
-        if (!$animal) {
-            return response()->json(['error' => 'Animal not found'], 404);
+        $alimentacion = Alimentacion::with('animal')->find($id);
+        if (!$alimentacion) {
+            return response()->json(['message' => 'Not found'], 404);
         }
 
-        return response()->json($animal);
+        return response()->json($alimentacion);
     }
 
     /**
-     * Update the specified animal in storage.
+     * Update the specified alimentacion in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'sometimes|string|max:255',
-            'edad' => 'sometimes|integer',
-            'historia' => 'sometimes|string',
-            'especie_id' => 'sometimes|exists:especies,id',
-            'alimentacion_id' => 'sometimes|exists:alimentacions,id',
-            'cuidados_id' => 'sometimes|exists:cuidados,id',
-            'necesidades_id' => 'sometimes|exists:necesidades,id',
-            'tarea_id' => 'sometimes|exists:tareas,id',
+            'tipo' => 'sometimes|string|max:255',
+            'cantidad' => 'sometimes|numeric',
+            'animal_id' => 'sometimes|exists:animals,id'
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors(), 422);
         }
 
-        $animal = Animal::find($id);
-        if (!$animal) {
-            return response()->json(['error' => 'Animal not found'], 404);
+        $alimentacion = Alimentacion::find($id);
+        if (!$alimentacion) {
+            return response()->json(['message' => 'Not found'], 404);
         }
 
-        $animal->update($request->all());
-        return response()->json($animal);
+        $alimentacion->update($request->all());
+        return response()->json($alimentacion);
     }
 
     /**
-     * Remove the specified animal from storage.
+     * Remove the specified alimentacion from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $animal = Animal::find($id);
-        if (!$animal) {
-            return response()->json(['error' => 'Animal not found'], 404);
+        $alimentacion = Alimentacion::find($id);
+        if (!$alimentacion) {
+            return response()->json(['message' => 'Not found'], 404);
         }
 
-        $animal->delete();
-        return response()->json(['message' => 'Animal deleted successfully']);
+        $alimentacion->delete();
+        return response()->json(['message' => 'Deleted successfully'], 200);
     }
 }

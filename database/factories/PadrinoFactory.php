@@ -22,10 +22,10 @@ class PadrinoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'apellido' => $this->faker->regexify('[A-Za-z0-9]{45}'),
-            'email' => $this->faker->safeEmail(),
-            'telefono' => $this->faker->regexify('[A-Za-z0-9]{45}'),
+            'nombre' => $this->faker->word(),
+            'apellido' => $this->faker->word(),
+            'email' => $this->faker->word(),
+            'telefono' => $this->faker->word(),
             'user_id' => User::factory(),
         ];
     }

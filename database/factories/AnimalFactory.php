@@ -28,12 +28,12 @@ class AnimalFactory extends Factory
         return [
             'nombre' => $this->faker->name(),
             'edad' => $this->faker->numberBetween(1, 20),
-            'historia' => $this->faker->paragraph(),
-            'especie_id' => \App\Models\Especie::factory(),
-            'alimentacion_id' => \App\Models\Alimentacion::factory(),
-            'cuidados_id' => \App\Models\Cuidados::factory(),
-            'necesidades_id' => \App\Models\Necesidades::factory(),
-            'tarea_id' => \App\Models\Tareas::factory(),
+            'historia' => $this->faker->word(),
+            'especie_id' => Especie::factory(),
+            'alimentacion_id' => Alimentacion::factory(),
+            'cuidados_id' => Cuidados::factory(),
+            'necesidades_id' => Necesidades::factory(),
+            'tarea_id' => Tareas::factory(),
         ];
     }
 }

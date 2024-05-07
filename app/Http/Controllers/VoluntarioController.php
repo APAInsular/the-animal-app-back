@@ -15,7 +15,7 @@ class VoluntarioController extends Controller
      */
     public function index()
     {
-        $voluntarios = Voluntario::with(['user', 'formacion', 'usuario', 'tareas'])->get();
+        $voluntarios = Voluntario::all();
         return response()->json($voluntarios);
     }
 
@@ -54,14 +54,10 @@ class VoluntarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($voluntarios)
     {
-        $voluntario = Voluntario::with(['user', 'formacion', 'usuario', 'tareas'])->find($id);
-        if (!$voluntario) {
-            return response()->json(['error' => 'Voluntario not found'], 404);
-        }
-
-        return response()->json($voluntario);
+    
+        return response()->json($voluntarios);
     }
 
     /**
