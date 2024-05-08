@@ -30,7 +30,6 @@ class CuidadosController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'animal_id' => 'required|exists:animals,id'
         ]);
 
         if ($validator->fails()) {

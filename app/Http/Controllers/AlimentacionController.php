@@ -30,7 +30,6 @@ class AlimentacionController extends Controller
         $validator = Validator::make($request->all(), [
             'tipo' => 'required|string|max:255',
             'cantidad' => 'required|numeric',
-            'animal_id' => 'required|exists:animals,id'
         ]);
 
         if ($validator->fails()) {

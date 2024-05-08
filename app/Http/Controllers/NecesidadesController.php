@@ -69,7 +69,6 @@ class NecesidadesController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre' => 'sometimes|string|max:255',
             'descripcion' => 'sometimes|string',
-            'animal_id' => 'sometimes|exists:animals,id'
         ]);
 
         if ($validator->fails()) {

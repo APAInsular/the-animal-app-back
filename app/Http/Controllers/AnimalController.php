@@ -2,63 +2,122 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Animal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AnimalController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of animals.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $animals = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea'])->get();
+        return response()->json($animals);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new animal.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        // Return a view or a form to create a new animal
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created animal in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'edad' => 'required|integer',
+            'historia' => 'required|string',
+            'especie_id' => 'required|exists:especies,id',
+            'alimentacion_id' => 'exists:alimentacions,id',
+            'cuidados_id' => 'exists:cuidados,id',
+            'necesidades_id' => 'exists:necesidades,id',
+            'tarea_id' => 'exists:tareas,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $animal = Animal::create($request->all());
+        return response()->json($animal, 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified animal.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea'])->findOrFail($id);
+        return response()->json($animal);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified animal.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Return a view or a form to edit an existing animal
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified animal in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'sometimes|string|max:255',
+            'edad' => 'sometimes|integer',
+            'historia' => 'sometimes|string',
+            'especie_id' => 'exists:especies,id',
+            'alimentacion_id' => 'exists:alimentacions,id',
+            'cuidados_id' => 'exists:cuidados,id',
+            'necesidades_id' => 'exists:necesidades,id',
+            'tarea_id' => 'exists:tareas,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $animal = Animal::findOrFail($id);
+        $animal->update($request->all());
+        return response()->json($animal);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified animal from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $animal = Animal::findOrFail($id);
+        $animal->delete();
+        return response()->json(['message' => 'Animal deleted successfully']);
     }
 }
