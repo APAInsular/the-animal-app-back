@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('SeRepite', ["[Si","No"]);
             $table->date('fecha');
             $table->string('comentario', 100);
+            $table->enum('finalizada', ["[Si","No"]);
             $table->foreignId('animal_id')->constrained();
             $table->foreignId('voluntario_id')->constrained();
             $table->timestamps();

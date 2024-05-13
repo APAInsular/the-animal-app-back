@@ -40,6 +40,7 @@ Route::controller(UserController::class)->group(function () {
 
 });
 
+Route::get('/voluntarios/tareas/{id}', [VoluntarioController::class, 'tareas']);
 
 Route::apiResource('tareas', TareasController::class);
 Route::apiResource('voluntarios', VoluntarioController::class);

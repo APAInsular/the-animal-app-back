@@ -112,4 +112,11 @@ class VoluntarioController extends Controller
         $voluntario->delete();
         return response()->json(['message' => 'Voluntario deleted successfully']);
     }
+
+
+    public function tareas($voluntarioId)
+    {
+        $voluntario = Voluntario::with('tareas')->findOrFail($voluntarioId);
+        return response()->json($voluntario->tareas);
+    }
 }
