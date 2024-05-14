@@ -34,7 +34,7 @@ class VoluntarioController extends Controller
             'disponibilidad' => 'required|date',
             'idioma' => 'required|string|max:255',
             'horario' => 'required|string|max:255',
-            'user_id' => 'required|exists:direccion_usuarios,id',
+            'user_id' => 'required|exists:users,id',
             'formacion_id' => 'required|exists:formacions,id'
         ]);
 
