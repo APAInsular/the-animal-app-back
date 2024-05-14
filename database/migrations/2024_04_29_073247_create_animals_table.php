@@ -13,13 +13,26 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 45);
-            $table->string('edad', 45);
-            $table->text('historia');
-            $table->foreignId('especie_id')->constrained();
-            $table->foreignId('alimentacion_id')->constrained();
-            $table->foreignId('cuidados_id')->constrained();
-            $table->foreignId('necesidades_id')->constrained();
+            $table->string('nombre');
+            // $table->integer('edad')->nullable()->default(0);
+            $table->text('historia')->nullable();
+            $table->foreignId('especie_id')->nullable()->constrained();
+            $table->foreignId('alimentacion_id')->nullable()->constrained();
+            $table->foreignId('cuidados_id')->nullable()->constrained();
+            $table->foreignId('necesidades_id')->nullable()->constrained();
+            $table->string('foto')->nullable();
+            $table->date('fecha_esterilizacion')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->date('fecha_llegada')->nullable();
+            $table->string('raza')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('microchip')->nullable();
+            $table->boolean('esterilizado')->default(false);
+            $table->boolean('zoocan')->default(false);
+            $table->boolean('cartilla')->default(false);
+            $table->date('desparasitacion')->nullable();
+            $table->string('superpoder')->nullable();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

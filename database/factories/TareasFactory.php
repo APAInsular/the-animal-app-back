@@ -25,9 +25,10 @@ class TareasFactory extends Factory
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'descripcion' => $this->faker->text(),
-            'SeRepite' => $this->faker->randomElement(["['S\u00ed'","'No']"]),
+            // 'SeRepite' => $this->faker->randomElement(['Si', 'No']), // Valor válido para el enum
             'fecha' => $this->faker->date(),
             'comentario' => $this->faker->regexify('[A-Za-z0-9]{100}'),
+            // 'finalizada' => $this->faker->randomElement(['Si', 'No']), // Valor válido para el enum
             'animal_id' => Animal::factory(),
             'voluntario_id' => Voluntario::factory(),
         ];

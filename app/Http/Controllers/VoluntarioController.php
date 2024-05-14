@@ -55,7 +55,7 @@ class VoluntarioController extends Controller
      */
     public function show($voluntarios)
     {
-    
+
         return response()->json($voluntarios);
     }
 
@@ -75,7 +75,7 @@ class VoluntarioController extends Controller
             'disponibilidad' => 'sometimes|date',
             'idioma' => 'sometimes|string|max:255',
             'horario' => 'sometimes|string|max:255',
-            'usuario_id' => 'sometimes|exists:direccion_usuarios,id',
+            'user_id' => 'required|exists:users,id',
             'formacion_id' => 'sometimes|exists:formacions,id'
         ]);
 
