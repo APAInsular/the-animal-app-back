@@ -31,11 +31,10 @@ class VoluntarioController extends Controller
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:voluntarios',
-            'contraseña' => 'required|string|min:6',
             'disponibilidad' => 'required|date',
             'idioma' => 'required|string|max:255',
             'horario' => 'required|string|max:255',
-            'usuario_id' => 'required|exists:direccion_usuarios,id',
+            'user_id' => 'required|exists:users,id',
             'formacion_id' => 'required|exists:formacions,id'
         ]);
 
@@ -56,7 +55,7 @@ class VoluntarioController extends Controller
      */
     public function show($voluntarios)
     {
-    
+
         return response()->json($voluntarios);
     }
 
@@ -76,7 +75,7 @@ class VoluntarioController extends Controller
             'disponibilidad' => 'sometimes|date',
             'idioma' => 'sometimes|string|max:255',
             'horario' => 'sometimes|string|max:255',
-            'usuario_id' => 'sometimes|exists:direccion_usuarios,id',
+            'user_id' => 'required|exists:users,id',
             'formacion_id' => 'sometimes|exists:formacions,id'
         ]);
 

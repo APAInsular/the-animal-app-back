@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('nombre', 45);
             $table->string('apellido', 45);
             $table->string('email', 100);
-            $table->string('contraseña', 45);
             $table->date('disponibilidad');
             $table->text('idioma');
             $table->time('horario');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('formacion_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('formacion_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
