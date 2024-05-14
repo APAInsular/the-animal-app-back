@@ -33,6 +33,7 @@ class TareasController extends Controller
             'SeRepite' => 'required|boolean',
             'fecha' => 'required|date',
             'comentario' => 'string|nullable',
+            'url'=>'string|nullable',
             'animal_id' => 'required|exists:animals,id',
             'voluntario_id' => 'required|exists:voluntarios,id'
         ]);

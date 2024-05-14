@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 45);
             $table->text('descripcion');
-            $table->enum('SeRepite', ["[Si","No"]);
+            $table->enum('SeRepite', ["Si","No"]);
             $table->date('fecha');
             $table->string('comentario', 100);
-            $table->enum('finalizada', ["[Si","No"]);
+            $table->enum('finalizada', ["Si","No"]);
+            $table->string('url',200)->nullable();
             $table->foreignId('animal_id')->constrained();
             $table->foreignId('voluntario_id')->constrained();
             $table->timestamps();
