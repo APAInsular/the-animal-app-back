@@ -26,7 +26,6 @@ class VoluntarioFactory extends Factory
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'apellido' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'email' => $this->faker->safeEmail(),
-            'contraseña' => $this->faker->regexify('[A-Za-z0-9]{45}'),
             'disponibilidad' => $this->faker->date(),
             'idioma' => $this->faker->text(),
             'horario' => $this->faker->time(),

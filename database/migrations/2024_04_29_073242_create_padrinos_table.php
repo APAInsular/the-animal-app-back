@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('apellido', 45);
             $table->string('email', 100);
             $table->string('telefono', 45);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
