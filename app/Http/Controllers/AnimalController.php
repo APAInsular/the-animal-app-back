@@ -39,9 +39,9 @@ class AnimalController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
-            'edad' => 'required|integer',
-            'historia' => 'required|string',
-            'especie_id' => 'required|exists:especies,id',
+            // 'edad' => 'required|integer',
+            // 'historia' => 'required|string',
+            // 'especie_id' => 'required|exists:especies,id',
             'alimentacion_id' => 'exists:alimentacions,id',
             'cuidados_id' => 'exists:cuidados,id',
             'necesidades_id' => 'exists:necesidades,id',
@@ -90,9 +90,9 @@ class AnimalController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'sometimes|string|max:255',
-            'edad' => 'sometimes|integer',
-            'historia' => 'sometimes|string',
-            'especie_id' => 'exists:especies,id',
+            // 'edad' => 'sometimes|integer',
+            // 'historia' => 'sometimes|string',
+            // 'especie_id' => 'exists:especies,id',
             'alimentacion_id' => 'exists:alimentacions,id',
             'cuidados_id' => 'exists:cuidados,id',
             'necesidades_id' => 'exists:necesidades,id',
@@ -118,6 +118,6 @@ class AnimalController extends Controller
     {
         $animal = Animal::findOrFail($id);
         $animal->delete();
-        return response()->json(['message' => 'Animal deleted successfully']);
+        return response()->json(['message' => 'Animal deleted successfully'], 200);
     }
 }

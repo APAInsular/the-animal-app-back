@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->integer('edad')->nullable();
+            // $table->integer('edad')->nullable()->default(0);
             $table->text('historia')->nullable();
-            $table->foreignId('especie_id')->constrained();
+            $table->foreignId('especie_id')->nullable()->constrained();
             $table->foreignId('alimentacion_id')->nullable()->constrained();
             $table->foreignId('cuidados_id')->nullable()->constrained();
             $table->foreignId('necesidades_id')->nullable()->constrained();

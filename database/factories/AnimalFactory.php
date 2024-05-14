@@ -27,7 +27,7 @@ class AnimalFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name,
-            'edad' => $this->faker->numberBetween(1, 15),
+            // 'edad' => $this->faker->numberBetween(1, 15),
             'historia' => $this->faker->paragraph,
             'especie_id' => Especie::factory(), // Relación con Especie
             'alimentacion_id' => Alimentacion::factory(), // Relación con Alimentacion
