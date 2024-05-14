@@ -26,14 +26,26 @@ class AnimalFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->name(),
-            'edad' => $this->faker->numberBetween(1, 20),
-            'historia' => $this->faker->word(),
-            'especie_id' => Especie::factory(),
-            'alimentacion_id' => Alimentacion::factory(),
-            'cuidados_id' => Cuidados::factory(),
-            'necesidades_id' => Necesidades::factory(),
-            'tarea_id' => Tareas::factory(),
+            'nombre' => $this->faker->name,
+            'edad' => $this->faker->numberBetween(1, 15),
+            'historia' => $this->faker->paragraph,
+            'especie_id' => Especie::factory(), // Relación con Especie
+            'alimentacion_id' => Alimentacion::factory(), // Relación con Alimentacion
+            'cuidados_id' => Cuidados::factory(), // Relación con Cuidados
+            'necesidades_id' => Necesidades::factory(), // Relación con Necesidades
+            'foto' => $this->faker->imageUrl(640, 480, 'animals', true, 'cats'),
+            'fecha_esterilizacion' => $this->faker->optional()->date(),
+            'fecha_nacimiento' => $this->faker->optional()->date(),
+            'fecha_llegada' => $this->faker->optional()->date(),
+            'raza' => $this->faker->word,
+            'tipo' => $this->faker->word,
+            // 'microchip' => $this->faker->optional()->unique()->regexify('[A-Za-z0-9]{15}'),
+            'esterilizado' => $this->faker->boolean,
+            'zoocan' => $this->faker->boolean,
+            'cartilla' => $this->faker->boolean,
+            'desparasitacion' => $this->faker->optional()->date(),
+            'superpoder' => $this->faker->word,
+            'descripcion' => $this->faker->paragraph,
         ];
     }
 }

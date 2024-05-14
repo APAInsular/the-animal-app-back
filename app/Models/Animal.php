@@ -26,6 +26,19 @@ class Animal extends Model
         'cuidados_id',
         'necesidades_id',
         'tarea_id',
+        'foto',
+        'fecha_esterilizacion',
+        'fecha_nacimiento',
+        'fecha_llegada',
+        'raza',
+        'tipo',
+        'microchip',
+        'esterilizado',
+        'zoocan',
+        'cartilla',
+        'desparasitacion',
+        'superpoder',
+        'descripcion'
     ];
 
     /**
@@ -42,7 +55,7 @@ class Animal extends Model
         'tarea_id' => 'integer',
     ];
 
-    
+
 
     public function especie(): BelongsTo
     {
@@ -68,6 +81,4 @@ class Animal extends Model
     {
         return $this->belongsTo(\App\Models\Tareas::class);
     }
-
-   
 }
