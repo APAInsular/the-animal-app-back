@@ -48,6 +48,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Rol::class, 'rol_id');
     }
+
+    public function volunteer()
+{
+    return $this->hasOne(Voluntario::class); // Ajusta esto según tu relación real
+}
 }
 
 
