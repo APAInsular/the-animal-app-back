@@ -33,6 +33,7 @@ class TareasController extends Controller
             'SeRepite' => 'required|boolean',
             'fecha' => 'required|date',
             'comentario' => 'string|nullable',
+            'url' => 'string|nullable',
             'animal_id' => 'required|exists:animals,id',
             'voluntario_id' => 'required|exists:voluntarios,id'
         ]);
@@ -74,6 +75,7 @@ class TareasController extends Controller
             'nombre' => 'sometimes|string|max:255',
             'descripcion' => 'sometimes|string',
             'SeRepite' => 'sometimes|boolean',
+            'finalizado' => 'sometimes|boolean',
             'fecha' => 'sometimes|date',
             'comentario' => 'nullable|string',
             'animal_id' => 'sometimes|exists:animals,id',

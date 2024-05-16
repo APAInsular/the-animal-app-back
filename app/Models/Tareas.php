@@ -22,6 +22,7 @@ class Tareas extends Model
         'SeRepite',
         'fecha',
         'comentario',
+        'url',
         'animal_id',
         'voluntario_id',
     ];

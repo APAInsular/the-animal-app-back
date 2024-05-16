@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\Voluntario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class UserController extends Controller
         ]);
 
         // Manejar errores de validación
-        if($validate->fails()){
+        if ($validate->fails()) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation Error!',
@@ -55,29 +56,32 @@ class UserController extends Controller
         ]);
 
         // Manejar errores de validación
-        if($validate->fails()){
+        if ($validate->fails()) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Validation Error!',
                 'data' => $validate->errors(),
-            ], 403);  
+            ], 403);
         }
 
         // Verificar la existencia del correo electrónico
         $user = User::where('email', $request->email)->first();
 
         // Verificar la contraseña
-        if(!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Invalid credentials'
-                ], 401);
+            ], 401);
         }
 
         // Generar un token de acceso
         $data['token'] = $user->createToken($request->email)->plainTextToken;
         $data['user'] = $user;
-        
+
+        $volunteer = Voluntario::where('user_id', $user->id)->first();
+        $data['volunteer'] = $volunteer;
+
         // Preparar la respuesta
         $response = [
             'status' => 'success',
@@ -86,14 +90,14 @@ class UserController extends Controller
         ];
 
         return response()->json($response, 200);
-    } 
+    }
 
     // Método para cerrar sesión
     public function logout(Request $request)
     {
         // Obtener el usuario autenticado
         $user = auth()->user();
-    
+
         if ($user) {
             // Revocar todos los tokens del usuario
             auth()->tokens()->delete();
@@ -124,7 +128,7 @@ class UserController extends Controller
         }
     }
 
-  
+
 
     // Método para actualizar un usuario
     public function update(Request $request, User $user)
@@ -135,17 +139,17 @@ class UserController extends Controller
             'name' => 'string|max:250',
             'email' => 'string|email:rfc,dns|max:250|unique:users,email',
             'password' => 'min:8|confirmed',
-            
+
         ]);
-    
+
         // Manejar errores de validación
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         // Actualizar el usuario
         $user->update($request->all());
-    
+
         // Preparar la respuesta
         // return new UserResource($user);
     }
