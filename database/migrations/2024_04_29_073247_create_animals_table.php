@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('nombre');
             // $table->integer('edad')->nullable()->default(0);
             $table->text('historia')->nullable();
-            $table->foreignId('especie_id')->nullable()->constrained();
-            $table->foreignId('alimentacion_id')->nullable()->constrained();
-            $table->foreignId('cuidados_id')->nullable()->constrained();
-            $table->foreignId('necesidades_id')->nullable()->constrained();
+            $table->foreignId('especie_id')->nullable()->constrained()->default(0);
+            $table->foreignId('alimentacion_id')->nullable()->constrained()->default(0);
+            $table->foreignId('cuidados_id')->nullable()->constrained()->default(0);
+            $table->foreignId('necesidades_id')->nullable()->constrained()->default(0);
             $table->string('foto')->nullable();
             $table->date('fecha_esterilizacion')->nullable();
             $table->date('fecha_nacimiento')->nullable();

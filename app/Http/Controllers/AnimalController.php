@@ -15,7 +15,7 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $animals = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea'])->get();
+        $animals = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'historialesMedicos'])->get();
         return response()->json($animals);
     }
 
@@ -53,6 +53,13 @@ class AnimalController extends Controller
         }
 
         $animal = Animal::create($request->all());
+
+        if ($request->has('historiales_medicos')) {
+            foreach ($request->historiales_medicos as $historial) {
+                $animal->historialesMedicos()->create($historial);
+            }
+        }
+
         return response()->json($animal, 201);
     }
 
@@ -64,7 +71,7 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea'])->findOrFail($id);
+        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'historialesMedicos'])->findOrFail($id);
         return response()->json($animal);
     }
 
@@ -105,6 +112,17 @@ class AnimalController extends Controller
 
         $animal = Animal::findOrFail($id);
         $animal->update($request->all());
+
+        if ($request->has('historiales_medicos')) {
+            // Borrar historiales existentes
+            $animal->historialesMedicos()->delete();
+
+            // Crear nuevos historiales
+            foreach ($request->historiales_medicos as $historial) {
+                $animal->historialesMedicos()->create($historial);
+            }
+        }
+
         return response()->json($animal);
     }
 

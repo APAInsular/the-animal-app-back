@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-
+use App\Models\HistorialMedico;
 class Animal extends Model
 {
     use HasFactory;
@@ -80,5 +80,9 @@ class Animal extends Model
     public function tarea(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Tareas::class);
+    }
+    public function historialesMedicos()
+    {
+        return $this->hasMany(HistorialMedico::class);
     }
 }

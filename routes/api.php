@@ -37,7 +37,6 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
     Route::get('/users', [UserController::class, 'show']);
-
 });
 
 Route::get('/voluntarios/tareas/{id}', [VoluntarioController::class, 'tareas']);
@@ -54,9 +53,6 @@ Route::apiResource('direccion', DireccionController::class);
 Route::apiResource('necesidades', NecesidadesController::class);
 Route::apiResource('rol', RolController::class);
 Route::apiResource('permiso', PermisoController::class);
-
-
-
-
-
-
+Route::get('necesidades', [NecesidadesController::class, 'index']);
+Route::get('alimentaciones', [AlimentacionController::class, 'index']);
+Route::get('cuidados', [CuidadosController::class, 'index']);
