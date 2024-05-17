@@ -60,6 +60,12 @@ class AnimalController extends Controller
             }
         }
 
+        if ($request->has('vacunaciones')) {
+            foreach ($request->vacunaciones as $vacunacionData) {
+                $animal->vacunaciones()->create($vacunacionData);
+            }
+        }
+
         return response()->json($animal, 201);
     }
 
@@ -71,7 +77,7 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'historialesMedicos'])->findOrFail($id);
+        $animal = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'historialesMedicos','vacunaciones'])->findOrFail($id);
         return response()->json($animal);
     }
 
@@ -122,6 +128,16 @@ class AnimalController extends Controller
                 $animal->historialesMedicos()->create($historial);
             }
         }
+        if ($request->has('vacunaciones')) {
+            // Borrar vacunas existentes
+            $animal->vacunaciones()->delete();
+
+            // Crear nuevas vacunas
+            foreach ($request->vacunaciones as $vacunacionData) {
+                $animal->vacunaciones()->create($vacunacionData);
+            }
+        }
+
 
         return response()->json($animal);
     }

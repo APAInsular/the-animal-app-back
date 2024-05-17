@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\HistorialMedico;
+
 class Animal extends Model
 {
     use HasFactory;
@@ -21,15 +22,16 @@ class Animal extends Model
         'nombre',
         'edad',
         'historia',
-        'especie_id',
-        'alimentacion_id',
-        'cuidados_id',
-        'necesidades_id',
+        'especie',
+        'alimentacion',
+        'cuidados',
+        'necesidades',
         'tarea_id',
         'foto',
         'fecha_esterilizacion',
         'fecha_nacimiento',
         'fecha_llegada',
+        'fecha_fallecimiento',
         'raza',
         'tipo',
         'microchip',
@@ -84,5 +86,9 @@ class Animal extends Model
     public function historialesMedicos()
     {
         return $this->hasMany(HistorialMedico::class);
+    }
+    public function vacunaciones()
+    {
+        return $this->hasMany(Vacunacion::class);
     }
 }

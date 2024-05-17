@@ -16,14 +16,20 @@ return new class extends Migration
             $table->string('nombre');
             // $table->integer('edad')->nullable()->default(0);
             $table->text('historia')->nullable();
-            $table->foreignId('especie_id')->nullable()->constrained()->default(0);
-            $table->foreignId('alimentacion_id')->nullable()->constrained()->default(0);
-            $table->foreignId('cuidados_id')->nullable()->constrained()->default(0);
-            $table->foreignId('necesidades_id')->nullable()->constrained()->default(0);
+            // $table->foreignId('especie_id')->nullable()->constrained()->default(0);
+            // $table->foreignId('alimentacion_id')->nullable()->constrained()->default(0);
+            // $table->foreignId('cuidados_id')->nullable()->constrained()->default(0);
+            // $table->foreignId('necesidades_id')->nullable()->constrained()->default(0);
+
+            $table->text('especie')->nullable();
+            $table->text('alimentacion')->nullable();
+            $table->text('cuidados')->nullable();
+            $table->text('necesidades')->nullable();
             $table->string('foto')->nullable();
             $table->date('fecha_esterilizacion')->nullable();
             $table->date('fecha_nacimiento')->nullable();
             $table->date('fecha_llegada')->nullable();
+            $table->date('fecha_fallecimiento')->nullable();
             $table->string('raza')->nullable();
             $table->string('tipo')->nullable();
             $table->string('microchip')->nullable();

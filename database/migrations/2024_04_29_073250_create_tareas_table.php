@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 45);
             $table->text('descripcion');
-            $table->boolean("SeRepite");
+            $table->boolean("SeRepite")->default(true);
             $table->date('fecha');
             $table->string('comentario', 100);
             $table->boolean("finalizada")->nullable();
