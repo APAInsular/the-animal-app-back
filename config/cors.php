@@ -15,20 +15,37 @@ return [
     |
     */
 
-    'paths' => ['*'],
+    'paths' => [
 
-    'allowed_methods' => ['*'],
+        'api/*',
+       
+        'sanctum/csrf-cookie',
+       
+        'login',
+       
+        'register',
+       
+        'logout',
+       
+        'forgot-password',
+       
+        'reset-password',
+       
+        'verify-email',
+       
+        ],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'ivan.informaticamajada.es')],
+    'allowed_methods' => ['*','OPTIONS'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins' => ['https://ivan.informaticamajada.es'],
+
+    'allowed_origins_patterns' => [''],
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['*'],
 
     'max_age' => 0,
 
     'supports_credentials' => true,
-
 ];
