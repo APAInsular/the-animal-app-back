@@ -37,6 +37,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
     Route::get('/users', [UserController::class, 'show']);
+    Route::post('/createUser',[UserController::class,'create']);
+
 });
 
 Route::get('/voluntarios/tareas/{id}', [VoluntarioController::class, 'tareas']);

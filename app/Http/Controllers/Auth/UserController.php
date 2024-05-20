@@ -153,4 +153,27 @@ class UserController extends Controller
         // Preparar la respuesta
         // return new UserResource($user);
     }
+
+
+    public function create(Request $request)
+    {
+        // Validar los datos de la solicitud
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Crear el nuevo usuario con la contraseña por defecto
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make('12345678'), // Contraseña por defecto
+        ]);
+
+        return response()->json(['user' => $user], 201);
+    }
 }
