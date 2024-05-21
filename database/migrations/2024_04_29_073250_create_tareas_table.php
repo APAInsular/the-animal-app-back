@@ -18,7 +18,7 @@ return new class extends Migration
             $table->boolean("SeRepite")->default(true);
             $table->date('fecha');
             $table->string('comentario', 100);
-            $table->boolean("finalizada")->nullable();
+            $table->boolean("finalizada")->default(false);
             $table->string('url', 200)->nullable();
             $table->foreignId('animal_id')->constrained();
             $table->foreignId('voluntario_id')->constrained();

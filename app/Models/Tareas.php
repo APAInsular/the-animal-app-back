@@ -23,6 +23,7 @@ class Tareas extends Model
         'fecha',
         'comentario',
         'url',
+        'finalizada',
         'animal_id',
         'voluntario_id',
     ];
