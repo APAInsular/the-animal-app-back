@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-// made by Harkaitz
+// made by Harkaitz , modified by Lucas
 
 class AnimalController extends Controller
 {
