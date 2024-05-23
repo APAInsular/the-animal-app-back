@@ -10,6 +10,7 @@ use App\Models\Voluntario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+// made by Harkaitz
 class UserController extends Controller
 {
     // Método para registrar un nuevo usuario

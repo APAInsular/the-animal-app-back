@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Especie;
+// made by Lucas
 
 class EspecieFactory extends Factory
 {

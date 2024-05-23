@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Animal;
 use App\Models\Cuidados;
+// made by Lucas
 
 class CuidadosFactory extends Factory
 {

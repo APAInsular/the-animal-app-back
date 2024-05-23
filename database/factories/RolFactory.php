@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Permiso;
 // use App\Models\Permisos;
 use App\Models\Rol;
+// made by Lucas , modified by Harkaitz
 
 class RolFactory extends Factory
 {

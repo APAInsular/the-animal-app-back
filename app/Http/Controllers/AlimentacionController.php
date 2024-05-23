@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alimentacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+// made by Harkaitz
 
 class AlimentacionController extends Controller
 {

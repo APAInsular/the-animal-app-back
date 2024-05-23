@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// made by Harkaitz
 
 Route::controller(UserController::class)->group(function () {
     Route::post('/register', 'register');
@@ -40,8 +41,10 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/createUser',[UserController::class,'create']);
 
 });
+// made by Harkaitz
 
 Route::get('/voluntarios/tareas/{id}', [VoluntarioController::class, 'tareas']);
+// made by Harkaitz
 
 Route::apiResource('tareas', TareasController::class);
 Route::apiResource('voluntarios', VoluntarioController::class);

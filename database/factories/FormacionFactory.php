@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Formacion;
+// made by Lucas
 
 class FormacionFactory extends Factory
 {

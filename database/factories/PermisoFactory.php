@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Permiso;
+// made by Lucas
 
 class PermisoFactory extends Factory
 {

@@ -10,6 +10,7 @@ use App\Models\Cuidados;
 use App\Models\Especie;
 use App\Models\Necesidades;
 use App\Models\Tareas;
+// made by Lucas
 
 class AnimalFactory extends Factory
 {

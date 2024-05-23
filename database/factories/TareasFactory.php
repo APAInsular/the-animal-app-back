@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Animal;
 use App\Models\Tareas;
 use App\Models\Voluntario;
+// made by Lucas , modified by Harkaitz
 
 class TareasFactory extends Factory
 {

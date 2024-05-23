@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Padrino;
 use App\Models\User;
+// made by Lucas
 
 class PadrinoFactory extends Factory
 {

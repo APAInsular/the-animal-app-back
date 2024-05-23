@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tareas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+// made by Harkaitz , modified by Ivan
 
 class TareasController extends Controller
 {

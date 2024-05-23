@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+// made by Harkaitz
 
 class RolController extends Controller
 {

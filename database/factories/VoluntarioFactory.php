@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Formacion;
 use App\Models\User;
 use App\Models\Voluntario;
+// made by Lucas, modified by Harkaitz
 
 class VoluntarioFactory extends Factory
 {
