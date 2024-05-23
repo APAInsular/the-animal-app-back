@@ -16,7 +16,7 @@ class AnimalController extends Controller
      */
     public function index()
     {
-        $animals = Animal::with(['especie', 'alimentacion', 'cuidados', 'necesidades', 'tarea', 'historialesMedicos'])->get();
+        $animals = Animal::with(['tarea', 'historialesMedicos','vacunaciones'])->get();
         return response()->json($animals);
     }
 

@@ -76,9 +76,9 @@ class TareasController extends Controller
             'nombre' => 'sometimes|string|max:255',
             'descripcion' => 'sometimes|string',
             'SeRepite' => 'sometimes|boolean',
-            'finalizado' => 'sometimes|boolean',
+            'finalizada' => 'sometimes|boolean',
             'fecha' => 'sometimes|date',
-            'comentario' => 'nullable|string',
+            'comentario' => 'sometimes|string',
             'animal_id' => 'sometimes|exists:animals,id',
             'voluntario_id' => 'sometimes|exists:voluntarios,id'
         ]);
@@ -93,7 +93,7 @@ class TareasController extends Controller
         }
 
         $tarea->update($request->all());
-        return response()->json($tarea);
+        return response()->json($tarea, 201);
     }
 
     /**

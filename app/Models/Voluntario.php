@@ -25,7 +25,7 @@ class Voluntario extends Model
         'disponibilidad',
         'idioma',
         'horario',
-        'usuario_id',
+        'user_id',
         'formacion_id',
     ];
 
@@ -37,7 +37,7 @@ class Voluntario extends Model
     protected $casts = [
         'id' => 'integer',
         'disponibilidad' => 'date',
-        'usuario_id' => 'integer',
+        'user_id' => 'integer',
         'formacion_id' => 'integer',
     ];
 
