@@ -2,63 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 
 class MedicineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $medicines = Medicine::with('treatment')->get();
+        return response()->json($medicines);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $medicine = Medicine::with('treatment')->findOrFail($id);
+        return response()->json($medicine);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'Name' => 'required|string|max:45',
+            'Description' => 'nullable|string',
+            'idTreatment' => 'required|exists:treatments,idTreatment'
+        ]);
+
+        $medicine = Medicine::create($validated);
+        return response()->json($medicine, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $medicine = Medicine::findOrFail($id);
+
+        $validated = $request->validate([
+            'Name' => 'sometimes|string|max:45',
+            'Description' => 'sometimes|string',
+            'idTreatment' => 'sometimes|exists:treatments,idTreatment'
+        ]);
+
+        $medicine->update($validated);
+        return response()->json($medicine);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $medicine = Medicine::findOrFail($id);
+        $medicine->delete();
+        return response()->json(null, 204);
     }
 }

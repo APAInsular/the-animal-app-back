@@ -2,63 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tasks = Task::with(['zone', 'animal', 'user'])->get();
+        return response()->json($tasks);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $task = Task::with(['zone', 'animal', 'user'])->findOrFail($id);
+        return response()->json($task);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'Title' => 'required|string|max:45',
+            'Description' => 'nullable|string',
+            'idZone' => 'required|exists:zones,idZone',
+            'idAnimal' => 'required|exists:animals,idAnimal',
+            'idUser' => 'required|exists:users,idUser'
+        ]);
+
+        $task = Task::create($validated);
+        return response()->json($task, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $validated = $request->validate([
+            'Title' => 'sometimes|string|max:45',
+            'Description' => 'sometimes|string',
+            'idZone' => 'sometimes|exists:zones,idZone',
+            'idAnimal' => 'sometimes|exists:animals,idAnimal',
+            'idUser' => 'sometimes|exists:users,idUser'
+        ]);
+
+        $task->update($validated);
+        return response()->json($task);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return response()->json(null, 204);
     }
 }

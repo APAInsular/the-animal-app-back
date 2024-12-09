@@ -2,30 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(Request $request): Response
+    public function index()
     {
-        $users = User::all();
-
-        return view('user.index', compact('users'));
+        $users = User::with(['roles', 'animals', 'tasks'])->get();
+        return response()->json($users);
     }
 
-    public function create(Request $request): Response
+    public function show($id)
     {
-        return view('user.create');
+        $user = User::with(['roles', 'animals', 'tasks'])->findOrFail($id);
+        return response()->json($user);
     }
 
-    public function store(UserStoreRequest $request): Response
+    public function store(Request $request)
     {
-        $user = User::create($request->validated());
+        $validated = $request->validate([
+            'FirstName' => 'required|string|max:45',
+            'LastName' => 'required|string|max:45',
+            'Email' => 'required|string|max:45|email|unique:users,Email'
+        ]);
 
-        return redirect()->route('user.index');
+        $user = User::create($validated);
+        return response()->json($user, 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'FirstName' => 'sometimes|string|max:45',
+            'LastName' => 'sometimes|string|max:45',
+            'Email' => 'sometimes|email|max:45|unique:users,Email,' . $id . ',idUser'
+        ]);
+
+        $user->update($validated);
+        return response()->json($user);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(null, 204);
     }
 }

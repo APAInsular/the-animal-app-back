@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Race;
 use Illuminate\Http\Request;
 
 class RaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $races = Race::with('species')->get();
+        return response()->json($races);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $race = Race::with('species')->findOrFail($id);
+        return response()->json($race);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'Name' => 'required|string|max:45',
+            'species_id' => 'required|exists:species,idSpecies'
+        ]);
+
+        $race = Race::create([
+            'Name' => $validated['Name'],
+            'idSpecies' => $validated['species_id']
+        ]);
+
+        return response()->json($race, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $race = Race::findOrFail($id);
+
+        $validated = $request->validate([
+            'Name' => 'sometimes|string|max:45',
+            'species_id' => 'sometimes|exists:species,idSpecies'
+        ]);
+
+        $race->update([
+            'Name' => $validated['Name'] ?? $race->Name,
+            'idSpecies' => $validated['species_id'] ?? $race->idSpecies
+        ]);
+
+        return response()->json($race);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $race = Race::findOrFail($id);
+        $race->delete();
+        return response()->json(null, 204);
     }
 }

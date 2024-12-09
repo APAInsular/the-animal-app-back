@@ -2,63 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feeding;
 use Illuminate\Http\Request;
 
 class FeedingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $feedings = Feeding::with('animals')->get();
+        return response()->json($feedings);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $feeding = Feeding::with('animals')->findOrFail($id);
+        return response()->json($feeding);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'Title' => 'required|string|max:45',
+            'Description' => 'nullable|string',
+        ]);
+
+        $feeding = Feeding::create($validated);
+        return response()->json($feeding, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $feeding = Feeding::findOrFail($id);
+
+        $validated = $request->validate([
+            'Title' => 'sometimes|string|max:45',
+            'Description' => 'sometimes|string'
+        ]);
+
+        $feeding->update($validated);
+        return response()->json($feeding);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $feeding = Feeding::findOrFail($id);
+        $feeding->delete();
+        return response()->json(null, 204);
     }
 }

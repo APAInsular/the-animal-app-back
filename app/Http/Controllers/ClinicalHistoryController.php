@@ -3,96 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClinicalHistory;
-
 use Illuminate\Http\Request;
 
 class ClinicalHistoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Obtener todas las historias clínicas
-        $clinicalHistories = ClinicalHistory::all();
-        return response()->json($clinicalHistories);
+        $histories = ClinicalHistory::with(['animal', 'treatments'])->get();
+        return response()->json($histories);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        // Esto es para devolver una vista de creación (opcional en APIs)
-        return view('clinical_histories.create');
+        $history = ClinicalHistory::with(['animal', 'treatments'])->findOrFail($id);
+        return response()->json($history);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Validar los datos de entrada
-        $validatedData = $request->validate([
-            'animal_id' => 'required|exists:animals,id',
-            'description' => 'required|string',
-            'date' => 'required|date',
+        $validated = $request->validate([
+            'Title' => 'required|string|max:45',
+            'Description' => 'nullable|string',
+            'idAnimal' => 'required|exists:animals,idAnimal'
         ]);
 
-        // Crear una nueva historia clínica
-        $clinicalHistory = ClinicalHistory::create($validatedData);
-
-        return response()->json($clinicalHistory, 201); // 201: Recurso creado
+        $history = ClinicalHistory::create($validated);
+        return response()->json($history, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        // Obtener una historia clínica por su ID
-        $clinicalHistory = ClinicalHistory::findOrFail($id);
-        return response()->json($clinicalHistory);
-    }
+        $history = ClinicalHistory::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        // Devolver una vista de edición (opcional en APIs)
-        $clinicalHistory = ClinicalHistory::findOrFail($id);
-        return view('clinical_histories.edit', compact('clinicalHistory'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        // Validar los datos de entrada
-        $validatedData = $request->validate([
-            'animal_id' => 'required|exists:animals,id',
-            'description' => 'required|string',
-            'date' => 'required|date',
+        $validated = $request->validate([
+            'Title' => 'sometimes|string|max:45',
+            'Description' => 'sometimes|string',
+            'idAnimal' => 'sometimes|exists:animals,idAnimal'
         ]);
 
-        // Actualizar la historia clínica
-        $clinicalHistory = ClinicalHistory::findOrFail($id);
-        $clinicalHistory->update($validatedData);
-
-        return response()->json($clinicalHistory);
+        $history->update($validated);
+        return response()->json($history);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        // Eliminar una historia clínica
-        $clinicalHistory = ClinicalHistory::findOrFail($id);
-        $clinicalHistory->delete();
-
-        return response()->json(['message' => 'Historia clínica eliminada correctamente']);
+        $history = ClinicalHistory::findOrFail($id);
+        $history->delete();
+        return response()->json(null, 204);
     }
 }

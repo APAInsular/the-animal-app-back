@@ -3,100 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
-
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Obtener todos los animales
-        $animals = Animal::all();
+        $animals = Animal::with(['race', 'zone', 'documents', 'clinicalHistories', 'microchips', 'users', 'needs', 'feeding', 'care'])->get();
         return response()->json($animals);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        // Devolver una vista para la creación de un animal (opcional para APIs)
-        return view('animals.create');
+        $animal = Animal::with(['race', 'zone', 'documents', 'clinicalHistories', 'microchips', 'users', 'needs', 'feeding', 'care'])->findOrFail($id);
+        return response()->json($animal);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Validar los datos de entrada
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:0',
-            'species_id' => 'required|exists:species,id', // Asegurar que la especie exista
-            'race_id' => 'required|exists:races,id', // Asegurar que la raza exista
-            'microchip' => 'nullable|string|unique:animals,microchip',
+        $validated = $request->validate([
+            'Description' => 'required|string|max:45',
+            'Superpower' => 'nullable|string|max:45',
+            'DateOfBirth' => 'nullable|date',
+            'DateOfDeath' => 'nullable|date',
+            'idRace' => 'required|exists:races,idRace',
+            'idZone' => 'required|exists:zones,idZone'
         ]);
 
-        // Crear un nuevo animal
-        $animal = Animal::create($validatedData);
-
-        return response()->json($animal, 201); // 201: Recurso creado
+        $animal = Animal::create($validated);
+        return response()->json($animal, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        // Obtener un animal por su ID
         $animal = Animal::findOrFail($id);
+
+        $validated = $request->validate([
+            'Description' => 'sometimes|string|max:45',
+            'Superpower' => 'sometimes|string|max:45',
+            'DateOfBirth' => 'sometimes|date',
+            'DateOfDeath' => 'sometimes|date',
+            'idRace' => 'sometimes|exists:races,idRace',
+            'idZone' => 'sometimes|exists:zones,idZone'
+        ]);
+
+        $animal->update($validated);
         return response()->json($animal);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        // Devolver una vista para la edición de un animal (opcional para APIs)
-        $animal = Animal::findOrFail($id);
-        return view('animals.edit', compact('animal'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        // Validar los datos de entrada
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:0',
-            'species_id' => 'required|exists:species,id',
-            'race_id' => 'required|exists:races,id',
-            'microchip' => 'nullable|string|unique:animals,microchip,' . $id, // Permitir que el microchip sea único excepto para este animal
-        ]);
-
-        // Actualizar el animal
-        $animal = Animal::findOrFail($id);
-        $animal->update($validatedData);
-
-        return response()->json($animal);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        // Eliminar un animal
         $animal = Animal::findOrFail($id);
         $animal->delete();
-
-        return response()->json(['message' => 'Animal eliminado correctamente']);
+        return response()->json(null, 204);
     }
 }

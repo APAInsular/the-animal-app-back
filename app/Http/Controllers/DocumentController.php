@@ -2,63 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $documents = Document::with('animal')->get();
+        return response()->json($documents);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $document = Document::with('animal')->findOrFail($id);
+        return response()->json($document);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'Title' => 'required|string|max:45',
+            'Document' => 'required|string|max:45',
+            'idAnimal' => 'required|exists:animals,idAnimal'
+        ]);
+
+        $document = Document::create($validated);
+        return response()->json($document, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $document = Document::findOrFail($id);
+
+        $validated = $request->validate([
+            'Title' => 'sometimes|string|max:45',
+            'Document' => 'sometimes|string|max:45',
+            'idAnimal' => 'sometimes|exists:animals,idAnimal'
+        ]);
+
+        $document->update($validated);
+        return response()->json($document);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $document = Document::findOrFail($id);
+        $document->delete();
+        return response()->json(null, 204);
     }
 }
