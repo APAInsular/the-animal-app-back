@@ -1,0 +1,113 @@
+models:
+  Species:
+    idSpecies: int
+    Name: string:45
+    relationships:
+      hasMany: Race
+
+  Race:
+    idRace: int
+    Name: string:45
+    relationships:
+      belongsTo: Species
+      hasMany: Animal
+
+  Zone:
+    idZone: int
+    Title: string:45
+    Description: longtext
+    relationships:
+      hasMany: Animal, Task
+
+  Animal:
+    idAnimal: int
+    Description: string:45
+    Superpower: string:45
+    DateOfBirth: date
+    DateOfDeath: date
+    relationships:
+      belongsTo: Race, Zone
+      hasMany: Document, ClinicalHistory, Microchip
+      belongsToMany: User, Needs, Feeding, Care
+
+  User:
+    idUser: int
+    FirstName: string:45
+    LastName: string:45
+    Email: string:45
+    relationships:
+      belongsToMany: Role, Animal
+      hasMany: Task
+
+  Document:
+    idDocument: int
+    Title: string:45
+    Document: varchar:45
+    relationships:
+      belongsTo: Animal
+
+  Microchip:
+    idMicrochip: int
+    NumChip: int
+    relationships:
+      belongsTo: Animal
+
+  ClinicalHistory:
+    idClinicalHistory: int
+    Title: string:45
+    Description: text
+    relationships:
+      belongsTo: Animal
+      hasMany: Treatment
+
+  Treatment:
+    idTreatment: int
+    Name: string:45
+    Frequency: varchar:45
+    Dose: varchar:45
+    Comments: text
+    relationships:
+      belongsTo: ClinicalHistory
+      hasMany: Medicine
+
+  Medicine:
+    idMedicine: int
+    Name: string:45
+    Description: text
+    relationships:
+      belongsTo: Treatment
+
+  Task:
+    idTask: int
+    Title: string:45
+    Description: text
+    relationships:
+      belongsTo: Zone, Animal, User
+
+  Care:
+    idCare: int
+    Title: string:45
+    Description: text
+    relationships:
+      belongsToMany: Animal
+
+  Feeding:
+    idFeeding: int
+    Title: string:45
+    Description: text
+    relationships:
+      belongsToMany: Animal
+
+  Needs:
+    idNeeds: int
+    Title: string:45
+    Description: text
+    relationships:
+      belongsToMany: Animal
+
+  Role:
+    idRole: int
+    Title: string:45
+    Description: string:45
+    relationships:
+      belongsToMany: User

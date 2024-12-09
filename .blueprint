@@ -1,0 +1,67 @@
+created:
+    - database/factories/SpeciesFactory.php
+    - database/factories/RaceFactory.php
+    - database/factories/ZoneFactory.php
+    - database/factories/AnimalFactory.php
+    - database/factories/UserFactory.php
+    - database/factories/DocumentFactory.php
+    - database/factories/MicrochipFactory.php
+    - database/factories/ClinicalHistoryFactory.php
+    - database/factories/TreatmentFactory.php
+    - database/factories/MedicineFactory.php
+    - database/factories/TaskFactory.php
+    - database/factories/CareFactory.php
+    - database/factories/FeedingFactory.php
+    - database/factories/NeedsFactory.php
+    - database/factories/RoleFactory.php
+    - database/migrations/2024_10_02_090718_create_species_table.php
+    - database/migrations/2024_10_02_090719_create_races_table.php
+    - database/migrations/2024_10_02_090720_create_zones_table.php
+    - database/migrations/2024_10_02_090721_create_animals_table.php
+    - database/migrations/2024_10_02_090722_create_users_table.php
+    - database/migrations/2024_10_02_090723_create_documents_table.php
+    - database/migrations/2024_10_02_090724_create_microchips_table.php
+    - database/migrations/2024_10_02_090725_create_clinical_histories_table.php
+    - database/migrations/2024_10_02_090726_create_treatments_table.php
+    - database/migrations/2024_10_02_090727_create_medicines_table.php
+    - database/migrations/2024_10_02_090728_create_tasks_table.php
+    - database/migrations/2024_10_02_090729_create_cares_table.php
+    - database/migrations/2024_10_02_090730_create_feedings_table.php
+    - database/migrations/2024_10_02_090731_create_needs_table.php
+    - database/migrations/2024_10_02_090732_create_roles_table.php
+    - database/migrations/2024_10_02_090733_create_animal_user_table.php
+    - database/migrations/2024_10_02_090734_create_animal_needs_table.php
+    - database/migrations/2024_10_02_090735_create_animal_feeding_table.php
+    - database/migrations/2024_10_02_090736_create_animal_care_table.php
+    - database/migrations/2024_10_02_090737_create_role_user_table.php
+    - app/Models/Species.php
+    - app/Models/Race.php
+    - app/Models/Zone.php
+    - app/Models/Animal.php
+    - app/Models/User.php
+    - app/Models/Document.php
+    - app/Models/Microchip.php
+    - app/Models/ClinicalHistory.php
+    - app/Models/Treatment.php
+    - app/Models/Medicine.php
+    - app/Models/Task.php
+    - app/Models/Care.php
+    - app/Models/Feeding.php
+    - app/Models/Needs.php
+    - app/Models/Role.php
+models:
+    Species: { idSpecies: int, Name: 'string:45', relationships: { hasMany: Race } }
+    Race: { idRace: int, Name: 'string:45', relationships: { belongsTo: Species, hasMany: Animal } }
+    Zone: { idZone: int, Title: 'string:45', Description: longtext, relationships: { hasMany: 'Animal, Task' } }
+    Animal: { idAnimal: int, Description: 'string:45', Superpower: 'string:45', DateOfBirth: date, DateOfDeath: date, relationships: { belongsTo: 'Race, Zone', hasMany: 'Document, ClinicalHistory, Microchip', belongsToMany: 'User, Needs, Feeding, Care' } }
+    User: { idUser: int, FirstName: 'string:45', LastName: 'string:45', Email: 'string:45', relationships: { belongsToMany: 'Role, Animal', hasMany: Task } }
+    Document: { idDocument: int, Title: 'string:45', Document: 'varchar:45', relationships: { belongsTo: Animal } }
+    Microchip: { idMicrochip: int, NumChip: int, relationships: { belongsTo: Animal } }
+    ClinicalHistory: { idClinicalHistory: int, Title: 'string:45', Description: text, relationships: { belongsTo: Animal, hasMany: Treatment } }
+    Treatment: { idTreatment: int, Name: 'string:45', Frequency: 'varchar:45', Dose: 'varchar:45', Comments: text, relationships: { belongsTo: ClinicalHistory, hasMany: Medicine } }
+    Medicine: { idMedicine: int, Name: 'string:45', Description: text, relationships: { belongsTo: Treatment } }
+    Task: { idTask: int, Title: 'string:45', Description: text, relationships: { belongsTo: 'Zone, Animal, User' } }
+    Care: { idCare: int, Title: 'string:45', Description: text, relationships: { belongsToMany: Animal } }
+    Feeding: { idFeeding: int, Title: 'string:45', Description: text, relationships: { belongsToMany: Animal } }
+    Needs: { idNeeds: int, Title: 'string:45', Description: text, relationships: { belongsToMany: Animal } }
+    Role: { idRole: int, Title: 'string:45', Description: 'string:45', relationships: { belongsToMany: User } }
